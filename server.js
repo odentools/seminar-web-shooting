@@ -13,11 +13,8 @@ var app = express();
 app.use(express.static('node_modules/jquery/dist/')); // jquery.js
 app.use(express.static('public/'));
 
-// ルート
-//app.use('/api/articles', require(__dirname + '/routes/api/articles'));
-
 // Webサーバを開始
-var server = app.listen(3000, function () {
+var server = app.listen(process.env.PORT || 3000, function () {
 	var host = server.address().address;
 	var port = server.address().port;
 	console.log('The app listening on port %s:%s', host, port);
