@@ -1,0 +1,19 @@
+{
+  "name": "seminar-web-shooting",
+  "version": "1.0.0",
+  "description": "シューティングゲーム",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OdenTools",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jquery": "^2.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
+}

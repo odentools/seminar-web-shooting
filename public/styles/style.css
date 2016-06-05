@@ -1,0 +1,42 @@
+/**
+ * seminar-web-shooting - スタイルシート
+ */
+
+
+/**
+ * ページ全体
+ */
+
+body {
+	background-color: #333333;
+	color: #ffffff;
+}
+
+
+/**
+ * ゲーム画面
+ */
+
+#view {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+
+/**
+ * 機体
+ */
+
+.airplane {
+	background-image: url(/images/airplane.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
