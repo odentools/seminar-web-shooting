@@ -3,13 +3,38 @@
  */
 
 
-var Airplane = function ($elem) {
+/**
+ * 飛行機オブジェクトの初期化
+ * @param {Element}  $elem          jQuery要素
+ * @param {Boolean} opt_is_reverse  機体が反転しているか否か (オプション)
+ * @param {[type]}  opt_x           初期位置のX座標 (オプション)
+ * @param {[type]}  opt_y           初期位置のY座標 (オプション)
+ */
+var Airplane = function ($elem, opt_is_reverse, opt_x, opt_y) {
 
 	// 機体のDOM要素
 	this.$elem = $elem;
 
+	// 機体の向きが反転しているか否か
+	if (opt_is_reverse) {
+
+		this.isReverse = true; // 反転している
+
+		// CSSで画像を反転させる
+		this.$elem.css({
+			transform: 'scale(-1)'
+		});
+
+	} else {
+
+		this.isReverse = false; // 反転していない
+
+	}
+
 	// 座標をリセット
-	this.moveTo(100, 100);
+	opt_x = opt_x || 100;
+	opt_y = opt_y || 100;
+	this.moveTo(opt_x, opt_y);
 
 };
 
@@ -61,7 +86,7 @@ Airplane.prototype.fire = function () {
 		top: ball_y
 	});
 
-	// 弾を前へ移動させていく
+	// 弾を前へ移動させていくためのタイマーを生成
 	var interval = setInterval(function () {
 
 		// 弾のY座標を指定
@@ -69,15 +94,23 @@ Airplane.prototype.fire = function () {
 			top: ball_y
 		});
 
-		// 弾のY座標を減らす
-		ball_y -= 5;
-
-		// 弾が画面外になったら自分自身を消す
-		if (ball_y < 0) {
-			$ball.remove();
+		// 弾のY座標を変化させる
+		if (self.isReverse) { // 機体が反転しているならば
+			ball_y += 10; // 弾を下へずらす
+		} else {
+			ball_y -= 10; // 弾を上へずらす
 		}
 
-	}, 10);
+		// 弾が画面外になったら
+		if (ball_y < 0) {
+			// 弾を消す
+			$ball.remove();
+			$ball = null;
+			// タイマーを停止
+			clearInterval(interval);
+		}
+
+	}, 20);
 
 };
 
@@ -116,7 +149,13 @@ Airplane.prototype.moveFront = function (opt_speed) {
 
 	var self = this;
 
-	self.moveTo(self.getX(), self.getY() - 10);
+	if (self.isReverse) { // 機体が反転しているならば
+		// 画面下方向へずらす
+		self.moveTo(self.getX(), self.getY() + 10);
+	} else { // 機体が順向(上向き)ならば
+		// 画面上方向へずらす)
+		self.moveTo(self.getX(), self.getY() - 10);
+	}
 
 };
 
@@ -129,7 +168,13 @@ Airplane.prototype.moveBack = function (opt_speed) {
 
 	var self = this;
 
-	self.moveTo(self.getX(), self.getY() + 10);
+	if (self.isReverse) { // 機体が反転しているならば
+		// 画面上方向へずらす
+		self.moveTo(self.getX(), self.getY() - 10);
+	} else { // 機体が順向(上向き)ならば
+		// 画面下方向へずらす
+		self.moveTo(self.getX(), self.getY() + 10);
+	}
 
 };
 
@@ -142,7 +187,11 @@ Airplane.prototype.moveLeft = function (opt_speed) {
 
 	var self = this;
 
-	self.moveTo(self.getX() - 10, self.getY());
+	if (self.isReverse) { // 機体が反転しているならば
+		self.moveTo(self.getX() + 10, self.getY());
+	} else { // 機体が順向(上向き)ならば
+		self.moveTo(self.getX() - 10, self.getY());
+	}
 
 };
 
@@ -155,6 +204,10 @@ Airplane.prototype.moveRight = function (opt_speed) {
 
 	var self = this;
 
-	self.moveTo(self.getX() + 10, self.getY());
+	if (self.isReverse) { // 機体が反転しているならば
+		self.moveTo(self.getX() - 10, self.getY());
+	} else { // 機体が順向(上向き)ならば
+		self.moveTo(self.getX() + 10, self.getY());
+	}
 
 };
