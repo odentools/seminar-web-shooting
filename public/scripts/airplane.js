@@ -102,7 +102,7 @@ Airplane.prototype.fire = function () {
 		}
 
 		// 弾が画面外になったら
-		if (ball_y < 0) {
+		if (ball_y < 0 || $(window).height() < ball_y) {
 			// 弾を消す
 			$ball.remove();
 			$ball = null;
