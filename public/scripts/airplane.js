@@ -57,7 +57,7 @@ Airplane.prototype.moveTo = function (x, y) {
 
 
 /**
- * 弾を発射
+ * 赤、青弾を発射
  */
 Airplane.prototype.fire = function () {
 
@@ -69,12 +69,19 @@ Airplane.prototype.fire = function () {
 	// 弾のDOM要素を <div id="view"> へ追加
 	$('#view').append($ball);
 
+var img_url;
+	if (self.isReverse) { // 機体が反転しているならば
+		img_url = 'url(/images/R_ball.png)';
+	} else {
+		img_url = 'url(/images/B_ball.png)';
+	}
+
 	// 弾の画像とサイズを指定
 	$ball.css({
-		backgroundImage: 'url(/images/ball.png)',
+		backgroundImage: img_url,
 		backgroundSize: 'contain',
-		height: 50,
-		width: 50,
+		height: 30,
+		width: 30,
 		position: 'absolute'
 	});
 

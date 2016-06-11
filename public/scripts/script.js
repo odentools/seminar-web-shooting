@@ -22,6 +22,7 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 		} else {
 			enemy.moveRight();
 		}
+		
 
 		if (!enemy_direction && enemy.getX() <= 0) {
 			// 敵機を反転させる
@@ -31,14 +32,14 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 			enemy_direction = !enemy_direction;
 		}
 
-	}, 50);
+	}, 10);
 
 	// 敵機による弾発射
 	window.setInterval(function () {
 
-		enemy.fire();
-
-	}, 1500);
+//		enemy.R_fire();
+			enemy.fire();
+}, 300);
 
 	// キーが押されたときのイベントハンドラを定義
 	$(window).keydown(function (event) {
@@ -60,7 +61,10 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 			player.moveRight();
 		} else if (keycode == 32) { // スペースキーならば
 			// 自機から弾を発射
+
+//			player.B_fire();
 			player.fire();
+
 		}
 
 	});
