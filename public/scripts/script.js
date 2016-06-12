@@ -1,30 +1,32 @@
 /**
  * seminar-web-shooting - フロントエンド スクリプト
  */
- //	難しさ選択
- /*var easy_x = $(window).width() / 10;
- var easy_y = $(window).height() / 10;
- var easy = new level($('#easy'),false, easy_x, easy_y);
- var normal_x = $(window).width() / 10;
- var normal_y = $(window).height() / 8;
- var normal = new level($('#normal'),false, normal_x, normal_y);
- var hard_x = $(window).width() / 10;
- var hard_y = $(window).height() / 6;
- var hard = new level($('#hard'),false, hard_x, hard_y);
 
  $(function(){
- $("easy").click(function(){
- enemySpeed = 100;
- enemy Burret = 10;
- start();
- })
- })
- */
-$(function () { // ページの読み込み(正しくはDOMの構築)が完了したとき
+  $("#easy").click(function(){
+    enemySpeed = 150;
+    enemyBurret = 900;
+    start();
+  });
+  $("#normal").click(function(){
+    enemySpeed = 100;
+    enemyBurret = 800;
+    start();
+  });
+  $("#hard").click(function(){
+    enemySpeed = 20;
+    enemyBurret = 250;
+    start();
+  });
+
+});
 
 
+var start = function () { // ページの読み込み(正しくはDOMの構築)が完了したとき
 
-
+  $("#easy").remove();
+  $("#normal").remove();
+  $("#hard").remove();
 
 	// 飛行機オブジェクトの初期化 - 自機
 	var player_x = $(window).width() / 2;
@@ -34,14 +36,6 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 	// 飛行機オブジェクトの初期化 - 敵機
 	var enemy = new Airplane($('#enemy'), true);
 
-/*
-	// インターバル
-	var Button_x = $(window).width() / 4;
-	var Button_y = $(window).height() /10;
-	var levelbth = new Button($('#levelbth'),) false, Button_x, Button_y);
-	$("#levelbth").click(function(){
-
-*/
 		// 敵機を左右に動かす
 		var enemy_direction = true;
 		window.setInterval(function () {
@@ -61,14 +55,14 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 				enemy_direction = !enemy_direction;
 			}
 
-		}, 10);
+		}, enemySpeed);
 
 		// 敵機による弾発射
 		window.setInterval(function () {
 
 		//		enemy.R_fire();
 				enemy.fire();
-		}, 300);
+		}, enemyBurret);
 
 		// キーが押されたときのイベントハンドラを定義
 		$(window).keydown(function (event) {
@@ -96,5 +90,4 @@ $(function () { // ページの読み込み(正しくはDOMの構築)が完了�
 			}
 
 		});
-//	});
-});
+};
