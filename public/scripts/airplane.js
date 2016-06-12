@@ -1,8 +1,19 @@
 /**
  * seminar-web-shooting - 飛行機オブジェクト スクリプト
  */
-
-
+/*
+var level = function () {
+ 	$(“#levelBth”).click(function () { // スタートボタンがクリックされた時
+ 		var sec = 5;
+ 		var timer = window.setInterval(function () {
+ 			$("#time").html(sec);
+ 			sec--;
+ 			if (sec < 0) {
+ 				var f = 1;
+			}
+		},1000);
+	};
+  */
 /**
  * 飛行機オブジェクトの初期化
  * @param {Element}  $elem          jQuery要素
