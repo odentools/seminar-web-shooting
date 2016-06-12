@@ -48,9 +48,12 @@ Airplane.prototype.moveTo = function (x, y) {
 
 	var self = this;
 
+	var airplaneheight = self.$elem[0].offsetHeight;
+	var airplaneWidth = self.$elem[0].offsetWidth;
+
 	self.$elem.css({
-		left: x,
-		top: y
+		left: x -airplaneWidth/2,
+		top: y - airplaneheight/2
 	});
 
 };
